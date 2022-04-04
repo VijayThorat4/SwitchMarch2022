@@ -1,0 +1,18 @@
+*** Settings ***
+Library  SeleniumLibrary
+
+*** Test Cases ***
+get all links Test
+    open browser    https://www.360logica.com/blog/9-incredible-open-source-tools-for-checking-links/     chrome
+    maximize browser window
+
+    ${allLinksCount}=    get element count   xpath://a              # To find total coumt
+    log to console      ${allLinksCount}
+
+    @{linkText}     create list
+
+    FOR     ${i}    IN  RANGE   1   ${allLinksCount}                # To print link text
+        ${linkText}=    get text     xpath:(//a)[${i}]
+        log to console      ${linkName}
+    END
+

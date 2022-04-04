@@ -1,0 +1,34 @@
+def fun1 (){
+    echo "${env.TC_Name}"
+//	File myFile = new File("Try1.txt")
+//	myFile.write("Entering first line")
+
+	File myFile = "C:/Users/VJ/Desktop/Switch/Jenkins/tmp.txt"
+	myFile.write(env.TC_Name)
+	println myFile.text
+}
+
+
+
+pipeline {
+    agent any
+
+    stages {
+        stage('Release'){
+            steps{
+                echo 'Product ready to release'
+                fun1()
+            }
+        }        
+    }
+}
+
+
+
+
+## Signature Needs to be approved while using file IO operations in groovy
+new java.io.File java.lang.String
+staticMethod org.codehaus.groovy.runtime.DefaultGroovyMethods getText java.io.File
+staticMethod org.codehaus.groovy.runtime.DefaultGroovyMethods write java.io.File java.lang.String
+
+

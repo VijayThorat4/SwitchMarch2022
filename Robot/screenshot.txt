@@ -1,0 +1,13 @@
+*** Settings ***
+Library  SeleniumLibrary
+
+*** Test Cases ***
+Browser Navigation
+    open browser    https://opensource-demo.orangehrmlive.com/     chrome
+    maximize browser window
+
+    input text      id:txtUsername  vj
+    input text      id:txtPassword  rocks
+
+    capture element screenshot      xpath://img[@src="/webres_5fee89a90600f2.94309009/themes/default/images/login/logo.png"]    logo.png
+    capture page screenshot         C:/Users/VJ/PycharmProjects/pythonProject/page.png

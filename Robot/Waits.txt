@@ -1,0 +1,37 @@
+*** Settings ***
+Library  SeleniumLibrary
+
+
+*** Test Cases ***
+Different waits
+    open browser    http://demowebshop.tricentis.com/register   chrome
+
+    ${implicittime} =   get selenium implicit time      # to check the default value of implicit time, it is 0
+    log to console      ${implicittime}
+    set selenium implicit wait  10 seconds
+    ${implicittime} =   get selenium implicit time      # to check the changed value of implicit time
+    log to console      ${implicittime}
+
+    sleep   2
+    maximize browser window
+
+    ${time}=   get selenium timeout        # to know the default selenium timeout, it is 5 seconds
+    log to console      ${time}
+
+    set selenium timeout    10 seconds  # to change default timeout
+    wait until page contains    Register    # text on the webpage to be verified
+
+    ${time}=   get selenium timeout        # to know the changed selenium timeout
+    log to console      ${time}
+
+    ${speed} =  get selenium speed      # to know the default selenium speed, it is 0 seconds
+    log to console      ${speed}
+
+    set selenium speed      3 seconds
+    select radio button     Gender  M
+    input text      id:FirstName    David
+    input text      name:LastName   Wade
+
+    ${speed} =  get selenium speed      # to know the changed selenium speed
+    log to console  ${speed}
+

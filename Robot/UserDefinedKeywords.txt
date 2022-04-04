@@ -1,0 +1,88 @@
+# User defined variable without keyword - 
+
+*** Settings ***
+Library  SeleniumLibrary
+
+*** Test Cases ***
+TC1
+    launchBrowser
+    input text  name:q  VJ
+
+*** keywords ***
+launchBrowser
+    open browser    https://www.google.com  chrome
+    maximize browser window
+
+
+#####################################################################
+
+
+# User defined variable with keyword - 
+
+*** Test Cases ***
+TC1
+    launchBrowser  https://www.google.com   chrome
+    input text  name:q  VJ
+
+*** keywords ***
+launchBrowser
+    [Arguments]      ${appurl}  ${appbrowser}
+    open browser    ${appurl}  ${appbrowser}
+    maximize browser window
+
+
+###########################################################################
+
+
+# User Defined Keyword with Arguments & Return value
+
+*** Test Cases ***
+TC1
+    ${pageTitle}=    launchBrowser  https://www.google.com   chrome
+    log to console  ${pageTitle}
+    input text  name:q  VJ
+
+*** keywords ***
+launchBrowser
+    [Arguments]      ${appurl}  ${appbrowser}
+    open browser    ${appurl}  ${appbrowser}
+    maximize browser window
+    ${title} =  get title
+    [Return]    ${title}
+
+
+#################################################################################
+
+
+# Best practice to call keywords in test script
+
+*** Settings ***
+Library  SeleniumLibrary
+Resource  ../Resources/resources.robot
+
+*** Test Cases ***
+TC1
+    ${pageTitle}=    launchBrowser  https://www.google.com   chrome
+    log to console  ${pageTitle}
+    input text  name:q  VJ
+
+
+#####################################################################################
+
+
+# resources.robot file
+
+*** Settings ***
+Library  SeleniumLibrary
+
+*** keywords ***
+launchBrowser
+    [Arguments]      ${appurl}  ${appbrowser}
+    open browser    ${appurl}  ${appbrowser}
+    maximize browser window
+    ${title} =  get title
+    [Return]    ${title}
+
+
+
+

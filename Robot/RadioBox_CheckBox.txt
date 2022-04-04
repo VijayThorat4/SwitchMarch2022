@@ -1,0 +1,25 @@
+*** Settings ***
+Library  SeleniumLibrary
+
+*** Variables ***
+${url}  http://www.practiceselenium.com/practice-form.html
+${browser}  chrome
+
+*** Test Cases ***
+Testing Radio Button And Check Box
+    open browser    ${url}    ${browser}
+    maximize browser window
+    set selenium speed      2seconds
+
+    select radio button     sex     Female
+    select radio button     exp     4
+
+    select checkbox     BlackTea
+    select checkbox     RedTea
+    unselect checkbox   BlackTea
+
+
+
+
+*** Keywords ***
+

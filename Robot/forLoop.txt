@@ -1,0 +1,23 @@
+*** Test Cases ***
+FirstLoop
+   FOR   ${i}    IN RANGE    1   10
+    log to console  ${i}
+    END
+
+ForLoopWithList
+    @{items}    create list     103 5   89  1574    96
+    FOR     ${i}    IN  @{items}
+    log to console  ${i}
+    END
+
+ForLoopWithStrings
+    FOR     ${i}    IN  VJ  Ajay    Sumit   Avya    Vishlya
+    log to console  ${i}
+    END
+
+ForLoopWithExit
+    @{list1}    create list     420     8   9   75  3.2
+    FOR     ${i}    IN  @{list1}
+        log to console  ${i}
+        exit for loop if    ${i}==9
+    END

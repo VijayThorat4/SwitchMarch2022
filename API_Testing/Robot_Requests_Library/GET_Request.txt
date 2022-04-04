@@ -1,0 +1,31 @@
+*** Settings ***
+Library  RequestsLibrary
+Library  Collections
+
+
+
+*** Variables ***
+${base_url}     https://reqres.in
+${page_no}         2
+
+
+*** Test Cases ***
+Get_Info
+    create session  weather_info    ${base_url}
+    ${response}=    GET On Session  weather_info   url=api/users?page=${page_no}
+#    log to console      ${response.status_code}
+#    log to console      ${response.content}
+#    log to console      ${response.headers}
+
+
+    # Validating Status Code
+    ${status_code}=     convert to string   ${response.status_code}
+    should be equal     ${status_code}      200
+
+    # Validating content
+    ${body}=    convert to string  ${response.content}
+    should contain  ${body}     Michael
+
+    # Validating header
+    ${contentVal}=    get from dictionary  ${response.headers}      Content-Type
+    should be equal     ${contentVal}   application/json

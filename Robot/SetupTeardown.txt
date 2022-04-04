@@ -1,0 +1,18 @@
+*** Settings ***
+Suite Setup  log to console     Opening Browser
+Suite Teardown  log to console      Closing Browser
+
+Test Setup  log to console      Login to Application
+Test Teardown  log to console       Logout from Application
+
+
+*** Test Cases ***
+TC1 Prepaid Rechard
+    log to console  my mobile recharge
+
+TC2 Postpaid Recharge
+    log to console  Family phone recharge
+
+TC3 Bill Payment
+    log to console  Monthly bills
+

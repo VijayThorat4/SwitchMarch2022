@@ -1,0 +1,25 @@
+*** Settings ***
+Library  SeleniumLibrary
+
+*** Variables ***
+${url}  http://www.practiceselenium.com/practice-form.html
+${browser}  chrome
+
+*** Test Cases ***
+Testing Drop down & Lists
+    open browser    ${url}    ${browser}
+    maximize browser window
+
+    # Selecting from dropdown
+    select from list by label      continents      Asia
+    sleep   3
+    select from list by index      continents       6
+    sleep   3
+
+    # Selecting from list
+    select from list by label       selenium_commands   Wait Commands		# 'wait command' is option in the list
+    sleep   3
+    select from list by label       selenium_commands   Switch Commands
+    sleep   3
+
+    unselect from list by label     selenium_commands   Wait Commands

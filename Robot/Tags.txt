@@ -1,0 +1,26 @@
+*** Settings ***
+
+
+*** Test Cases ***
+TC1 User Registration Tests
+    [Tags]  Regression
+    log to console  This is user registration page
+    log to console  User registration is complete
+
+TC2 Login Tests
+    [Tags]  Sanity
+    log to console  This is login page
+    log to console  User login is complete
+
+TC3 Change User Setting
+    [Tags]  Regression
+    log to console  This is settings page
+    log to console  changes in setting is complete
+
+TC4 Logout Tests
+    [Tags]  Sanity
+    log to console  This is logout page
+    log to console  User logout is complete
+
+TC5 Test Without Tag
+    log to console  Last test

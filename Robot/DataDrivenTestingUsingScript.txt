@@ -1,0 +1,18 @@
+*** Settings ***
+Library  SeleniumLibrary
+Suite Setup  open browser    https://admin-demo.nopcommerce.com/login     chrome
+Suite Teardown  close all browsers
+Test Template  Username Entering
+
+
+*** Test Cases ***      username
+TC1     vj
+TC2     rj
+
+
+
+*** Keywords ***
+Username Entering
+    [Arguments]       ${username}
+    input text      id:Email    ${username}
+    sleep   2

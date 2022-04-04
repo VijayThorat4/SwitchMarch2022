@@ -1,0 +1,67 @@
+*** Settings ***
+Library  SeleniumLibrary
+
+*** Test Cases ***
+Multiple Window tabs
+    open browser    http://demo.automationtesting.in/Windows.html     chrome
+    maximize browser window
+    click element   xpath://button[@class="btn btn-info"]
+
+    select window   title=SeleniumHQ Browser Automation
+    click element   xpath://a[text()="Documentation"]
+       
+***********************************************************************************
+
+
+*** Settings ***
+Library  SeleniumLibrary
+
+*** Test Cases ***
+Browser Navigation
+    open browser    https://www.google.com     chrome
+    maximize browser window
+    sleep   2
+
+    open browser    http://www.bing.com     chrome
+    maximize browser window
+
+    switch browser  1
+    ${title1} =     get title
+    log to console    ${title1}
+
+    switch browser  2
+    ${title2} =     get title
+    log to console     ${title2}
+
+******************************************************************************************
+
+
+*** Settings ***
+Library  SeleniumLibrary
+
+*** Test Cases ***
+Browser Navigation
+    open browser    https://www.google.com     chrome
+    maximize browser window
+    ${loc}=     get location
+    log to console      ${loc}
+
+    go to   https://www.bing.com
+    ${loc}=     get location
+    log to console      ${loc}
+
+    go back
+    ${loc}=     get location
+    log to console      ${loc}
+
+
+
+
+
+
+
+
+
+
+
+

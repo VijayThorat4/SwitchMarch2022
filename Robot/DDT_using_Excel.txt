@@ -1,0 +1,18 @@
+*** Settings ***
+Library  SeleniumLibrary
+Library  DataDriver     ../TestData/LoginData.xlsx
+Suite Setup  open browser   https://admin-demo.nopcommerce.com/login   chrome
+Suite Teardown  close all browsers
+Test Template  Login Data
+
+
+*** Test Cases ***
+Login_tests_with_Excel usin ${Username}
+
+
+*** Keywords ***
+Login Data
+    [Arguments]     ${Username}
+    input text      id:Email        ${Username}
+    sleep   2
+

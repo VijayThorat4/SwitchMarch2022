@@ -1,0 +1,36 @@
+package asd;
+
+import org.testng.annotations.Test;
+
+import io.restassured.RestAssured;
+import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
+import junit.framework.Assert;
+
+public class getRe {
+	
+	@Test
+	public void weatherData() {
+		
+		// Request object creation
+		RequestSpecification re = RestAssured.given();
+		
+		// Response object
+		Response response = re.get("http://restapi.demoqa.com/utilities/weather/city/Pune");
+		
+		// Printing response
+		String responseBody = response.getBody().asString();
+		System.out.println(responseBody);
+		
+		// Status code validation
+		int statusCode = response.getStatusCode();
+		System.out.println("Status code is " + statusCode);
+		Assert.assertEquals(200, statusCode);
+		
+		// Status Line validation
+		String statusLine = response.getStatusLine();
+		System.out.println("Status line is " + statusLine);
+		Assert.assertEquals("HTTP/1.1 200 OK", statusLine);
+	}
+
+}

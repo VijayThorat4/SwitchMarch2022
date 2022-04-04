@@ -1,0 +1,28 @@
+*** Settings ***
+Library  RequestsLibrary
+Library  Collections
+
+
+*** Variables ***
+${base_url}     https://jsonplaceholder.typicode.com
+
+
+*** Test Cases ***
+TestHeaders
+    create session  mysession   ${base_url}
+    ${response}=    GET On Session  mysession   photos
+
+    ${headerTypeValue}=    get from dictionary  ${response.headers}    Content-Type
+    should be equal  ${headerTypeValue}    application/json; charset=utf-8
+
+    ${headerEncodeValue}=    get from dictionary  ${response.headers}    Transfer-Encoding
+    should be equal  ${headerEncodeValue}    chunked
+
+
+TestCookies
+    create session  mysession   ${base_url}
+    ${response}=    GET On Session  mysession   photos
+
+    log to console  ${response.cookies}     # displays all cookies
+    ${cookieValue}=    get from dictionary  ${response.cookies}    __cfduid
+    log to console  ${cookieValue}  # display specific cookie valie

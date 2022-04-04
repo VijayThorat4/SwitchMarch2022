@@ -1,0 +1,15 @@
+*** Settings ***
+Library  SeleniumLibrary
+
+*** Test Cases ***
+Browser Navigation
+    open browser    http://demo.guru99.com/test/simple_context_menu.html     chrome
+    maximize browser window
+
+    set selenium speed  3 seconds
+    open context menu   xpath://span[text()="right click me"]      # to perform right click
+    double click element    xpath://button[text()="Double-Click Me To See Alert"]
+    handle alert    accept
+
+    go to   https://www.seleniumeasy.com/test/drag-and-drop-demo.html
+    drag and drop   xpath://span[text()="Draggable 3"]     id:mydropzone

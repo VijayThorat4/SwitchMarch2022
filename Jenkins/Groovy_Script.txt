@@ -1,0 +1,34 @@
+def fun1 (){
+    echo "${env.Name}"
+    String var1 = "Ranjit Drives"
+    echo var1.split(' ')[1]
+}
+
+
+
+pipeline {
+    agent any
+    
+    parameters{
+        string(name: 'PERSON', defaultValue: 'Mr Kohli')
+    }
+    
+    stages {
+        stage('Build') {
+            steps {
+                echo "Clonning the Build ISO for ${env.Name}"
+            }
+        }
+        stage('Deploy'){
+            steps{
+                echo "Code Deployed & informed to ${params.PERSON}"
+            }
+        }
+        stage('Release'){
+            steps{
+                echo 'Product ready to release'
+                fun1()
+            }
+        }        
+    }
+}

@@ -1,0 +1,29 @@
+*** Settings ***
+Library  RequestsLibrary
+Library  Collections
+Library  JSONLibrary
+Library  os
+
+*** Variables ***
+${base_url}     http://restcountries.eu
+
+*** Test Cases ***
+Validate_JSON
+    create session  ContryInfo  ${base_url}
+    ${response}=    GET On Session  ContryInfo  rest/v2/alpha/IN
+    ${json_response}=   to json  ${response.content}
+
+    # Single Data Validation
+    ${country_name}=    get value from json  ${json_response}     $.name
+    log to console  ${country_name[0]}
+    should be equal  ${country_name[0]}     India
+
+    # Single Data Validation in array
+    ${border_name}=    get value from json  ${json_response}     $.borders[0]   # AFG will get extracted in list format
+    should be equal  ${border_name[0]}     AFG
+
+    # Multiple Data Validation in array
+    ${borders}=    get value from json  ${json_response}     $.borders  # all border names will get extracted
+    log to console  ${borders[0]}       # 0th element is list of all borders
+    should contain any  ${borders[0]}   AFG     BTN     CHN
+

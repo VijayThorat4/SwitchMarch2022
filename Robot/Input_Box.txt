@@ -1,0 +1,25 @@
+*** Settings ***
+Library  SeleniumLibrary
+
+*** Variables ***
+${url}  https://www.facebook.com/
+${browser}  chrome
+
+*** Test Cases ***
+HandleInputText
+    open browser    ${url}    ${browser}
+    maximize browser window
+    title should be     Facebook – log in or sign up
+    ${"email"}  set variable    id:email
+
+    element should be visible   ${"email"}
+    element should be enabled    ${"email"}
+
+    input text  ${"email"}  vj@rocks.com
+    sleep   5
+    clear element text  ${"email"}
+    sleep   3
+
+*** Keywords ***
+
+

@@ -1,0 +1,16 @@
+*** Settings ***
+Library  SeleniumLibrary
+
+*** Test Cases ***
+Scrolling Test
+    open browser    https://www.countries-ofthe-world.com/flags-of-the-world.html     chrome
+    maximize browser window
+
+    #execute javascript      window.scrollTo(0,1500)        # to scroll the page by specific pixcel
+
+    #scroll element into view    xpath://img[@src="flags-normal/flag-of-India.png"]    # to scroll till specific element
+
+    execute javascript      window.scrollTo(0,document.body.scrollHeight)           # to move to bottom of the page
+    sleep   3
+    execute javascript      window.scrollTo(0,-document.body.scrollHeight)           # to move to top of the page
+

@@ -1,0 +1,19 @@
+*** Settings ***
+Library  SeleniumLibrary
+
+*** Test Cases ***
+Handling Frames
+    open browser    https://www.selenium.dev/selenium/docs/api/java/index.html?org/openqa/selenium/cli/package-summary.html     chrome
+    maximize browser window
+
+    select frame    packageListFrame        # provide name / id / xpath
+    click link      org.openqa.selenium
+    unselect frame                          # like coming to default content in selenium java
+
+    select frame    packageFrame
+    click link      Rotatable
+    unselect frame
+
+    select frame    classFrame
+    click link      Help
+    

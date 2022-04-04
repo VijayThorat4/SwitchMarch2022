@@ -1,0 +1,72 @@
+*** Settings ***
+Library  RequestsLibrary
+Library  Collections
+
+
+
+*** Variables ***
+${base_url}=    http://localhost:8080
+
+
+*** Test Cases ***
+TC1: Returns all video games (GET)
+    create session  mysession   ${base_url}
+    ${response}=    GET On Session  mysession   app/videogames
+    log to console  ${response.status_code}
+    log to console  ${response.content}
+
+    #Validation
+    ${status_code}=     convert to string  ${response.status_code}
+    should be equal     ${status_code}      200
+
+
+TC2: Add new video game (POST)
+    create session  mysession   ${base_url}
+    ${body}=    create dictionary  id=420   name=VJ_Rocks   releaseDate=2020-02-20T08:55:58:510Z    reviewScore=5   category=timepass   rating=Universal
+    ${header}=  create dictionary  Content-Type=application/json
+
+    ${response}=    POST On Session     mysession   app/videogames  data=${body}    headers=${header}
+    log to console  ${response.status_code}
+    log to console  ${response.content}
+
+    #Validations
+    ${status_code}=     convert to string  ${response.status_code}
+    should be equal     ${status_code}      200
+
+    ${res_body}=     convert to string  ${response.content}
+    should contain      ${res_body}     Record Added Successfully
+
+
+TC3: Update the existing game (PUT)
+    create session  mysession   ${base_url}
+    ${body}=    create dictionary  id=640   name=Batman   releaseDate=2020-02-20T08:55:58:510Z    reviewScore=5   category=timepass   rating=Universal      # modified name of the game
+    ${header}=  create dictionary  Content-Type=application/json
+
+    ${response}=    PUT On Session  mysession   app/videogames/640      data=${body}    headers=${header}
+    log to console  ${response.status_code}
+    log to console  ${response.content}
+
+    #Validations
+    ${status_code}=     convert to string  ${response.status_code}
+    should be equal     ${status_code}      200
+
+    ${res_body}=     convert to string  ${response.content}
+    should contain      ${res_body}     Batman
+
+
+TC4: Delete the game (DELETE)
+    create session  mysession   ${base_url}
+    ${response}=    DELETE On Session     mysession   url=app/videogames/640
+
+    #Validations
+    ${status_code}=     convert to string  ${response.status_code}
+    should be equal     ${status_code}      200
+
+    ${res_body}=     convert to string  ${response.content}
+    should contain      ${res_body}     Record Deleted Successfully
+
+
+
+
+
+

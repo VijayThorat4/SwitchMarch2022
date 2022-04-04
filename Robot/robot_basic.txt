@@ -1,0 +1,15 @@
+*** Settings ***
+Library  SeleniumLibrary
+
+*** Variables ***
+${url}  https://www.nopcommerce.com/
+${browser}  chrome
+
+*** Test Cases ***
+LoginTest
+    open browser    ${url}    ${browser}
+    click element  xpath://span[text()='Product']
+    close browser
+
+*** Keywords ***
+
